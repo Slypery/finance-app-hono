@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
     "strict": true,
+    "module": "ESNext",
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
+    "moduleResolution": "bundler",
     "baseUrl": ".",
     "paths": {
       "@/*": [

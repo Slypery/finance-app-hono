@@ -9,3 +9,4 @@ function requireEnv(name: string): string {
 }
 
 export const DATABASE_URL = requireEnv("DATABASE_URL")
+export const JWT_SECRET = requireEnv("JWT_SECRET")
