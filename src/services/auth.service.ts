@@ -158,10 +158,10 @@ export async function refreshAccessToken(refreshToken: string): Promise<RefreshA
   })
 
   // Check if the token provided exist in our database
-  if (!storedToken) throw new InvalidTokenError
+  if (!storedToken) throw new InvalidTokenError()
 
   // Check if it already revoked
-  if (storedToken.revokedAt) new TokenRevokedError
+  if (storedToken.revokedAt) new TokenRevokedError()
 
   // Check if it expired
   if (storedToken.expiresAt < new Date()) {
@@ -170,7 +170,7 @@ export async function refreshAccessToken(refreshToken: string): Promise<RefreshA
       .set({ revokedAt: new Date() })
       .where(eq(refreshTokens.id, storedToken.id))
 
-    throw new TokenExpiredError
+    throw new TokenExpiredError()
   }
 
   // Check if it already used
@@ -181,7 +181,7 @@ export async function refreshAccessToken(refreshToken: string): Promise<RefreshA
       .set({ revokedAt: new Date() })
       .where(eq(refreshTokens.userId, storedToken.userId))
 
-    throw new TokenReuseDetectedError
+    throw new TokenReuseDetectedError()
   }
 
   const newAccessToken = await signAccessToken(storedToken.userId)
