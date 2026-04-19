@@ -81,7 +81,7 @@ export async function getWallets(userId: Users['id']): Promise<WalletData[]> {
 }
 
 export async function updateWallet(
-  input: UpdateWalletInput & { userId: Users['id']; accountId: Accounts['id'] }
+  input: UpdateWalletInput & { userId: Users['id']}
 ): Promise<WalletData> {
   if (!input.name && !input.description && !input.bankName && !input.bankNumber) throw new NoFieldsToUpdateError()
 
@@ -95,7 +95,7 @@ export async function updateWallet(
     const [account] = await tx
       .update(accounts)
       .set({
-        ...(input.name !== undefined && {name: input.name}),
+        ...((input.name !== undefined) && (input.name !== null) && {name: input.name}),
         ...(input.description !== undefined && {description: input.description}),
         updatedAt: new Date(),
       })

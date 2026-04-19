@@ -80,7 +80,7 @@ export const receivables = pgTable(
   {
     accountId: uuid('account_id').primaryKey(),
     accountType: text('account_type').notNull().default('receivable'),
-    contactName: text('contact_name').notNull(),
+    contactName: text('contact_name'),
     contactInfo: text('contact_info'),
     dueDate: timestamp('due_date'),
   },
