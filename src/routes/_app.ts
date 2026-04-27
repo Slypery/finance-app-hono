@@ -10,10 +10,6 @@ export type AppVariables = {
 export const appRoute = new Hono()
 appRoute.use(authMiddleware)
 
-appRoute.get('/', (c) => {
-  return c.json({ hello: 'world' })
-})
-
 appRoute.route('/me', profileRoute)
 appRoute.route('/me/wallets', walletRoute)
 appRoute.route('/me/receivables', receivableRoute)

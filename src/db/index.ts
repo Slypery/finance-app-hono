@@ -1,10 +1,10 @@
-import { drizzle } from 'drizzle-orm/bun-sql'
-import { SQL } from 'bun'
+import { drizzle } from 'drizzle-orm/node-postgres'
+import { Pool } from 'pg'
 import * as schema from '@/db/schema'
 import { DATABASE_URL } from '@/env'
 
-const g = global as typeof globalThis & { sql?: SQL }
+const g = global as typeof globalThis & { pool?: Pool }
 
-g.sql ??= new SQL(DATABASE_URL)
+g.pool ??= new Pool({ connectionString: DATABASE_URL })
 
-export const db = drizzle(g.sql, { schema })
+export const db = drizzle(g.pool, { schema })

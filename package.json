@@ -1,22 +1,24 @@
 {
   "name": "finance-app-hono",
   "scripts": {
-    "dev": "bun run --hot src/index.ts"
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts"
   },
   "dependencies": {
+    "@hono/node-server": "^1.x.x",
     "@hono/zod-validator": "^0.7.6",
     "argon2": "^0.44.0",
     "dotenv": "^17.4.2",
     "drizzle-orm": "^0.45.2",
-    "finance-app-hono": ".",
     "hono": "^4.12.12",
     "jose": "^6.2.2",
     "pg": "^8.20.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@types/bun": "latest",
+    "@types/node": "latest",
     "@types/pg": "^8.20.0",
+    "cross-env": "^10.1.0",
     "drizzle-kit": "^0.31.10",
     "tsx": "^4.21.0"
   }

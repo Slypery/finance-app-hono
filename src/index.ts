@@ -1,7 +1,9 @@
 import '@/env'
+import { PORT } from '@/env'
 import { AppError } from '@/errors/app.error'
 import { appRoute } from '@/routes/_app'
 import { authRoute } from '@/routes/_auth'
+import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import { logger } from 'hono/logger'
 import { appendFile, mkdir } from 'node:fs/promises'
@@ -25,7 +27,16 @@ app.onError((err, c) => {
   return c.json({ error: 'Internal Server Error' }, 500)
 })
 
+app.get('/', (c) => {
+  return c.json({ hello: 'world' })
+})
+
 app.route('/api/v1/auth/', authRoute)
 app.route('/api/v1/', appRoute)
 
-export default app
+serve({
+  fetch: app.fetch,
+  port: Number(PORT) || 3000
+}, (info) => {
+  console.log(`Server running on http://localhost:${info.port}`)
+})

@@ -5,10 +5,9 @@
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "moduleResolution": "bundler",
-    "baseUrl": ".",
     "paths": {
       "@/*": [
-        "src/*"
+        "./src/*"
       ]
     }
   }
