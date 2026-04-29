@@ -1,7 +1,7 @@
 {
   "name": "finance-app-hono",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
+    "dev": "tsx watch --watch src src/index.ts",
     "start": "tsx src/index.ts"
   },
   "dependencies": {
