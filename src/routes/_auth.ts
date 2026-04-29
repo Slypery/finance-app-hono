@@ -33,7 +33,11 @@ authRoute.post('/login', jsonValidator(loginSchema), async (c) => {
 authRoute.post('/refresh-access-token', async (c) => {
   const refreshToken = getCookie(c, 'refreshToken')
 
-  if (!refreshToken) return c.json({ success: false, code: 'NO_REFRESH_TOKEN_PROVIDED', error: 'No refresh token provided' }, 401)
+  if (!refreshToken)
+    return c.json(
+      { success: false, code: 'NO_REFRESH_TOKEN_PROVIDED', error: 'No refresh token provided' },
+      401
+    )
 
   const result = await refreshAccessToken(refreshToken)
 
@@ -42,5 +46,5 @@ authRoute.post('/refresh-access-token', async (c) => {
     `refreshToken=${result.refreshToken}; HttpOnly; SameSite=Lax; Path=api/v1/auth/refresh-access-token; Max-Age=${60 * 60 * 24 * 30}`
   )
 
-  return c.json({ success: true, data: { accessToken: result.accessToken } }, 200)
+  return c.json({ success: true, data: { accessToken: result.accessToken } })
 })

@@ -1,9 +1,9 @@
-import { db } from '@/db';
-import { AppVariables } from '@/routes/_app';
-import { eq } from 'drizzle-orm';
-import { Hono } from 'hono';
+import { db } from '@/db'
+import { AppVariables } from '@/routes/_app'
+import { eq } from 'drizzle-orm'
+import { Hono } from 'hono'
 
-export const profileRoute = new Hono<{Variables: AppVariables}>()
+export const profileRoute = new Hono<{ Variables: AppVariables }>()
 
 profileRoute.get('/', async (c) => {
   const userId = c.get('userId')
@@ -18,5 +18,5 @@ profileRoute.get('/', async (c) => {
     },
   })
 
-  return c.json(user)
+  return c.json({ sucess: true, data: user })
 })

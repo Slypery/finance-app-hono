@@ -1,4 +1,3 @@
-import '@/env'
 import { PORT } from '@/env'
 import { AppError } from '@/errors/app.error'
 import { appRoute } from '@/routes/_app'

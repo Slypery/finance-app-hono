@@ -6,6 +6,7 @@ import { Hono } from 'hono'
 
 export const walletRoute = new Hono<{ Variables: AppVariables }>()
 
+// Create Wallet
 walletRoute.post('/', jsonValidator(createWalletSchema), async (c) => {
   const input = c.req.valid('json')
   const wallet = await createWallet({
@@ -13,21 +14,23 @@ walletRoute.post('/', jsonValidator(createWalletSchema), async (c) => {
     userId: c.get('userId'),
   })
 
-  return c.json(wallet)
+  return c.json({ success: true, data: wallet })
 })
 
+// Get Wallet
 walletRoute.get('/', async (c) => {
   const walletData = await getWallets(c.get('userId'))
 
-  return c.json(walletData)
+  return c.json({ success: true, data: walletData })
 })
 
+// Patch Wallet
 walletRoute.patch('/', jsonValidator(updateWalletSchema), async (c) => {
   const input = c.req.valid('json')
   const wallet = await updateWallet({
     ...input,
-    userId: c.get('userId')
+    userId: c.get('userId'),
   })
 
-  return c.json(wallet)
+  return c.json({ success: true, data: wallet })
 })
