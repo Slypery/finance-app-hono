@@ -1,4 +1,4 @@
-import "dotenv/config"
+import 'dotenv/config'
 
 function requireEnv(name: string): string {
   const value = process.env[name]
@@ -8,6 +8,6 @@ function requireEnv(name: string): string {
   return value
 }
 
-export const DATABASE_URL = requireEnv("DATABASE_URL")
-export const JWT_SECRET = requireEnv("JWT_SECRET")
+export const DATABASE_URL = requireEnv('DATABASE_URL')
+export const JWT_SECRET = requireEnv('JWT_SECRET')
 export const PORT = process.env.PORT

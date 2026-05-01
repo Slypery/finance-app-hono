@@ -16,29 +16,29 @@ export const jsonValidator = <T extends z.ZodTypeAny>(schema: T) =>
   })
 
 export const paramValidator = <T extends z.ZodTypeAny>(schema: T) =>
-zValidator('param', schema, (result, c) => {
-  if (!result.success) {
-    return c.json(
-      {
-        success: false,
-        code: 'INVALID_REQUEST',
-        error: result.error.issues,
-      },
-      422
-    )
-  }
-})
+  zValidator('param', schema, (result, c) => {
+    if (!result.success) {
+      return c.json(
+        {
+          success: false,
+          code: 'INVALID_REQUEST',
+          error: result.error.issues,
+        },
+        422
+      )
+    }
+  })
 
 export const queryValidator = <T extends z.ZodTypeAny>(schema: T) =>
-zValidator('query', schema, (result, c) => {
-  if (!result.success) {
-    return c.json(
-      {
-        success: false,
-        code: 'INVALID_REQUEST',
-        error: result.error.issues,
-      },
-      422
-    )
-  }
-})
+  zValidator('query', schema, (result, c) => {
+    if (!result.success) {
+      return c.json(
+        {
+          success: false,
+          code: 'INVALID_REQUEST',
+          error: result.error.issues,
+        },
+        422
+      )
+    }
+  })

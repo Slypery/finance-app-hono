@@ -1,9 +1,17 @@
 import { db } from '@/db'
 import { accounts, Accounts, receivables, Receivables, Users } from '@/db/schema'
-import { AccountAlreadyExistsError, AccountNotFoundError, AccountUpdateAlreadyExistsError } from '@/errors/account.error'
+import {
+  AccountAlreadyExistsError,
+  AccountNotFoundError,
+  AccountUpdateAlreadyExistsError,
+} from '@/errors/account.error'
 import { NoFieldsToUpdateError } from '@/errors/app.error'
 import { CreateReceivableInput, UpdateReceivableInput } from '@/schemas/receivable.schema'
-import { accountBalanceSubquery, isAccountBelongsToUser, isAccountNameTaken } from '@/services/account/_helpers'
+import {
+  accountBalanceSubquery,
+  isAccountBelongsToUser,
+  isAccountNameTaken,
+} from '@/services/account/_helpers'
 import { and, eq, sql } from 'drizzle-orm'
 
 type ReceivableData = {

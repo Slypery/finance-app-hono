@@ -1,6 +1,10 @@
 import { db } from '@/db'
 import { accounts, Accounts, Users, wallets, Wallets } from '@/db/schema'
-import { AccountAlreadyExistsError, AccountNotFoundError, AccountUpdateAlreadyExistsError } from '@/errors/account.error'
+import {
+  AccountAlreadyExistsError,
+  AccountNotFoundError,
+  AccountUpdateAlreadyExistsError,
+} from '@/errors/account.error'
 import { NoFieldsToUpdateError } from '@/errors/app.error'
 import { CreateWalletInput, UpdateWalletInput } from '@/schemas/wallet.schema'
 import {
@@ -81,22 +85,23 @@ export async function getWallets(userId: Users['id']): Promise<WalletData[]> {
 }
 
 export async function updateWallet(
-  input: UpdateWalletInput & { userId: Users['id']}
+  input: UpdateWalletInput & { userId: Users['id'] }
 ): Promise<WalletData> {
-  if (!input.name && !input.description && !input.bankName && !input.bankNumber) throw new NoFieldsToUpdateError()
+  if (!input.name && !input.description && !input.bankName && !input.bankNumber)
+    throw new NoFieldsToUpdateError()
 
   if (!(await isAccountBelongsToUser(input.accountId, input.userId)))
     throw new AccountNotFoundError()
 
-  if (input.name && await isAccountNameTaken(input.name, input.userId, input.accountId))
+  if (input.name && (await isAccountNameTaken(input.name, input.userId, input.accountId)))
     throw new AccountUpdateAlreadyExistsError(input.name)
 
   const wallet = await db.transaction(async (tx): Promise<WalletData> => {
     const [account] = await tx
       .update(accounts)
       .set({
-        ...((input.name !== undefined) && (input.name !== null) && {name: input.name}),
-        ...(input.description !== undefined && {description: input.description}),
+        ...(input.name !== undefined && input.name !== null && { name: input.name }),
+        ...(input.description !== undefined && { description: input.description }),
         updatedAt: new Date(),
       })
       .where(and(eq(accounts.id, input.accountId), eq(accounts.type, 'wallet')))
@@ -106,8 +111,8 @@ export async function updateWallet(
       .update(wallets)
       .set({
         accountId: wallets.accountId,
-        ...(input.bankName !== undefined && {bankName: input.bankName}),
-        ...(input.bankNumber !== undefined && {bankNumber: input.bankNumber}),
+        ...(input.bankName !== undefined && { bankName: input.bankName }),
+        ...(input.bankNumber !== undefined && { bankNumber: input.bankNumber }),
       })
       .where(eq(wallets.accountId, input.accountId))
       .returning()

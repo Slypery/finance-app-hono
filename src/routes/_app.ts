@@ -13,4 +13,3 @@ appRoute.use(authMiddleware)
 appRoute.route('/me', profileRoute)
 appRoute.route('/me/wallets', walletRoute)
 appRoute.route('/me/receivables', receivableRoute)
-

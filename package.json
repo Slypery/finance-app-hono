@@ -16,10 +16,17 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/node": "latest",
     "@types/pg": "^8.20.0",
     "cross-env": "^10.1.0",
     "drizzle-kit": "^0.31.10",
-    "tsx": "^4.21.0"
+    "eslint": "^10.2.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "jiti": "^2.6.1",
+    "prettier": "^3.8.3",
+    "tsx": "^4.21.0",
+    "typescript-eslint": "^8.59.1"
   }
 }

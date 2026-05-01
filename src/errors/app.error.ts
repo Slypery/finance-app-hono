@@ -1,4 +1,4 @@
-import { ContentfulStatusCode } from 'hono/utils/http-status';
+import { ContentfulStatusCode } from 'hono/utils/http-status'
 
 export class AppError extends Error {
   constructor(
@@ -6,8 +6,8 @@ export class AppError extends Error {
     public statusCode: ContentfulStatusCode,
     public code: string
   ) {
-    super(message);
-    this.name = this.constructor.name;
+    super(message)
+    this.name = this.constructor.name
   }
 }
 

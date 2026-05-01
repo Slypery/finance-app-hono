@@ -33,9 +33,12 @@ app.get('/', (c) => {
 app.route('/api/v1/auth/', authRoute)
 app.route('/api/v1/', appRoute)
 
-serve({
-  fetch: app.fetch,
-  port: Number(PORT) || 3000
-}, (info) => {
-  console.log(`Server running on http://localhost:${info.port}`)
-})
+serve(
+  {
+    fetch: app.fetch,
+    port: Number(PORT) || 3000,
+  },
+  (info) => {
+    console.log(`Server running on http://localhost:${info.port}`)
+  }
+)

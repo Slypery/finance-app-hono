@@ -1,5 +1,18 @@
 import { InferSelectModel, sql } from 'drizzle-orm'
-import { check, decimal, foreignKey, index, integer, pgEnum, pgTable, primaryKey, text, timestamp, unique, uuid } from 'drizzle-orm/pg-core'
+import {
+  check,
+  decimal,
+  foreignKey,
+  index,
+  integer,
+  pgEnum,
+  pgTable,
+  primaryKey,
+  text,
+  timestamp,
+  unique,
+  uuid,
+} from 'drizzle-orm/pg-core'
 
 export type Users = InferSelectModel<typeof users>
 export const users = pgTable('users', {
@@ -156,7 +169,7 @@ export const transactions = pgTable(
 )
 
 export type TransactionLines = InferSelectModel<typeof transactionLines>
-export const  transactionLines = pgTable(
+export const transactionLines = pgTable(
   'transaction_lines',
   {
     transactionId: uuid('transaction_id').notNull(),
@@ -165,7 +178,7 @@ export const  transactionLines = pgTable(
       .notNull()
       .references(() => accounts.id, { onDelete: 'restrict' }),
     type: ledgerSideEnum('type').notNull(),
-    amount: decimal('amount', {mode: 'string'}).notNull().default('0'),
+    amount: decimal('amount', { mode: 'string' }).notNull().default('0'),
     exchangeRate: decimal('exchange_rate'),
   },
   (table) => [
