@@ -1,4 +1,4 @@
-import z, { nullish } from 'zod'
+import z from 'zod'
 
 export type CreateReceivableInput = z.infer<typeof createReceivableSchema>
 export const createReceivableSchema = z.object({
