@@ -1,7 +1,7 @@
 import { PORT } from '@/env'
 import { AppError } from '@/errors/app.error'
-import { appRoute } from '@/routes/_app'
 import { authRoute } from '@/routes/_auth'
+import { userRoute } from '@/routes/user/_index'
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import { logger } from 'hono/logger'
@@ -31,7 +31,7 @@ app.get('/', (c) => {
 })
 
 app.route('/api/v1/auth/', authRoute)
-app.route('/api/v1/', appRoute)
+app.route('/api/v1/user/', userRoute)
 
 serve(
   {

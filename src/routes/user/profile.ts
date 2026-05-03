@@ -1,9 +1,9 @@
 import { db } from '@/db'
-import { AppVariables } from '@/routes/_app'
+import { UserVariables } from '@/routes/user/_index'
 import { eq } from 'drizzle-orm'
 import { Hono } from 'hono'
 
-export const profileRoute = new Hono<{ Variables: AppVariables }>()
+export const profileRoute = new Hono<{ Variables: UserVariables }>()
 
 profileRoute.get('/', async (c) => {
   const userId = c.get('userId')
