@@ -1,10 +1,10 @@
 import { jsonValidator } from '@/helpers/validator'
-import { AppVariables } from '@/routes/_app'
+import { UserVariables } from '@/routes/user/_index'
 import { createWalletSchema, updateWalletSchema } from '@/schemas/wallet.schema'
 import { createWallet, getWallets, updateWallet } from '@/services/account/wallet.service'
 import { Hono } from 'hono'
 
-export const walletRoute = new Hono<{ Variables: AppVariables }>()
+export const walletRoute = new Hono<{ Variables:UserVariables }>()
 
 // Create Wallet
 walletRoute.post('/', jsonValidator(createWalletSchema), async (c) => {

@@ -1,6 +1,7 @@
 import { InferSelectModel, sql } from 'drizzle-orm'
 import {
   check,
+  date,
   decimal,
   foreignKey,
   index,
@@ -95,7 +96,7 @@ export const receivables = pgTable(
     accountType: text('account_type').notNull().default('receivable'),
     contactName: text('contact_name'),
     contactInfo: text('contact_info'),
-    dueDate: timestamp('due_date'),
+    dueDate: date('due_date'),
   },
   (table) => [
     check('receivables_type_check', sql`account_type = 'receivable'`),

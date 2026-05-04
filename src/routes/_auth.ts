@@ -48,3 +48,5 @@ authRoute.post('/refresh-access-token', async (c) => {
 
   return c.json({ success: true, data: { accessToken: result.accessToken } })
 })
+
+authRoute.all('*', (c) => c.json({ message: 'Not found' }, 404))

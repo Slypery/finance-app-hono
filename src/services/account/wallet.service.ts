@@ -22,6 +22,8 @@ type WalletData = {
   bankName: Wallets['bankName'] | null
   bankNumber: Wallets['bankNumber'] | null
   balance: string
+  createdAt: Date
+  updatedAt: Date
 }
 
 export async function createWallet(
@@ -61,6 +63,8 @@ export async function createWallet(
       bankName: wallet.bankName,
       bankNumber: wallet.bankNumber,
       balance: '0',
+      createdAt: account.createdAt,
+      updatedAt: account.updatedAt,
     }
   })
   return wallet
@@ -77,6 +81,8 @@ export async function getWallets(userId: Users['id']): Promise<WalletData[]> {
       bankName: wallets.bankName,
       bankNumber: wallets.bankNumber,
       balance: sql`COALESCE(${balances.balance}, '0')`.mapWith(String),
+      createdAt: accounts.createdAt,
+      updatedAt: accounts.updatedAt,
     })
     .from(accounts)
     .innerJoin(wallets, eq(accounts.id, wallets.accountId))
@@ -125,6 +131,8 @@ export async function updateWallet(
       bankName: wallet.bankName,
       bankNumber: wallet.bankNumber,
       balance: '0',
+      createdAt: account.createdAt,
+      updatedAt: account.updatedAt,
     }
   })
   return wallet

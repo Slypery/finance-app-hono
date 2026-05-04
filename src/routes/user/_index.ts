@@ -10,6 +10,6 @@ export type UserVariables = {
 export const userRoute = new Hono()
 userRoute.use(authMiddleware)
 
-userRoute.route('/me', profileRoute)
-userRoute.route('/me/wallets', walletRoute)
-userRoute.route('/me/receivables', receivableRoute)
+userRoute.route('/profile', profileRoute)
+userRoute.route('/wallets', walletRoute)
+userRoute.route('/receivables', receivableRoute)

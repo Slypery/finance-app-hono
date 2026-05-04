@@ -23,6 +23,8 @@ type ReceivableData = {
   contactInfo: Receivables['contactInfo']
   dueDate: Receivables['dueDate']
   balance: string
+  createdAt: Date
+  updatedAt: Date
 }
 
 export async function createReceivable(
@@ -64,6 +66,8 @@ export async function createReceivable(
       contactInfo: receivable.contactInfo,
       dueDate: receivable.dueDate,
       balance: '0',
+      createdAt: account.createdAt,
+      updatedAt: account.updatedAt,
     }
   })
 
@@ -82,6 +86,8 @@ export async function getReceivables(userId: Users['id']): Promise<ReceivableDat
       contactInfo: receivables.contactInfo,
       dueDate: receivables.dueDate,
       balance: sql`COALESCE(${balances.balance}, '0')`.mapWith(String),
+      createdAt: accounts.createdAt,
+      updatedAt: accounts.updatedAt,
     })
     .from(accounts)
     .innerJoin(receivables, eq(accounts.id, receivables.accountId))
@@ -138,6 +144,8 @@ export async function updateReceivable(
       contactInfo: receivable.contactInfo,
       dueDate: receivable.dueDate,
       balance: '0',
+      createdAt: account.createdAt,
+      updatedAt: account.updatedAt,
     }
   })
   return receivable

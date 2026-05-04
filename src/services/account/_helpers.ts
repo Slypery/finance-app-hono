@@ -6,7 +6,7 @@ export async function isAccountNameTaken(
   accountName: Accounts['name'],
   userId: Users['id'],
   exceptAccountId?: Accounts['id']
-): Promise<Boolean> {
+): Promise<boolean> {
   const result = await db.query.accounts.findFirst({
     columns: { id: true },
     where: and(
@@ -22,7 +22,7 @@ export async function isAccountNameTaken(
 export async function isAccountBelongsToUser(
   accountId: Accounts['id'],
   userId: Users['id']
-): Promise<Boolean> {
+): Promise<boolean> {
   const result = await db.query.accounts.findFirst({
     columns: { id: true },
     where: and(eq(accounts.id, accountId), eq(accounts.userId, userId)),
