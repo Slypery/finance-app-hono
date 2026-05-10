@@ -1,5 +1,6 @@
 import { InferSelectModel, sql } from 'drizzle-orm'
 import {
+  AnyPgColumn,
   check,
   date,
   decimal,
@@ -9,6 +10,7 @@ import {
   pgEnum,
   pgTable,
   primaryKey,
+  serial,
   text,
   timestamp,
   unique,
@@ -173,17 +175,20 @@ export type TransactionLines = InferSelectModel<typeof transactionLines>
 export const transactionLines = pgTable(
   'transaction_lines',
   {
+    id: uuid('id').defaultRandom().primaryKey(),
     transactionId: uuid('transaction_id').notNull(),
     sequence: integer('sequence').notNull(),
     accountId: uuid('account_id')
       .notNull()
       .references(() => accounts.id, { onDelete: 'restrict' }),
     type: ledgerSideEnum('type').notNull(),
+    parentId: uuid('parent_id').references((): AnyPgColumn => transactionLines.id, {
+      onDelete: 'cascade',
+    }),
     amount: decimal('amount', { mode: 'string' }).notNull().default('0'),
-    exchangeRate: decimal('exchange_rate'),
+    exchangeRate: decimal('exchange_rate', { mode: 'string' }).default('1'),
   },
   (table) => [
-    primaryKey({ columns: [table.transactionId, table.sequence] }),
     foreignKey({ columns: [table.transactionId], foreignColumns: [transactions.id] }).onDelete(
       'cascade'
     ),
