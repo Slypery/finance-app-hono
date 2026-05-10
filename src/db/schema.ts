@@ -185,6 +185,7 @@ export const transactionLines = pgTable(
     parentId: uuid('parent_id').references((): AnyPgColumn => transactionLines.id, {
       onDelete: 'cascade',
     }),
+    notes: text('notes'),
     amount: decimal('amount', { mode: 'string' }).notNull().default('0'),
     exchangeRate: decimal('exchange_rate', { mode: 'string' }).default('1'),
   },
