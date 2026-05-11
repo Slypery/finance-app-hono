@@ -9,8 +9,6 @@ import {
   integer,
   pgEnum,
   pgTable,
-  primaryKey,
-  serial,
   text,
   timestamp,
   unique,
@@ -187,7 +185,7 @@ export const transactionLines = pgTable(
     }), // used for additional lines (sublines) to record something like fee, taxes, etc
     notes: text('notes'),
     amount: decimal('amount', { mode: 'string' }).notNull().default('0'),
-    exchangeRate: decimal('exchange_rate', { mode: 'string' }).default('1'), // account currency -> base currency
+    exchangeRate: decimal('exchange_rate', { mode: 'string' }).notNull().default('1'), // account currency -> base currency
   },
   (table) => [
     foreignKey({ columns: [table.transactionId], foreignColumns: [transactions.id] }).onDelete(
