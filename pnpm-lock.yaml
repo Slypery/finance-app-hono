@@ -14,9 +14,6 @@ importers:
       '@hono/zod-validator':
         specifier: ^0.7.6
         version: 0.7.6(hono@4.12.15)(zod@4.3.6)
-      argon2:
-        specifier: ^0.44.0
-        version: 0.44.0
       decimal.js:
         specifier: ^10.6.0
         version: 10.6.0
@@ -26,6 +23,9 @@ importers:
       drizzle-orm:
         specifier: ^0.45.2
         version: 0.45.2(@types/pg@8.20.0)(pg@8.20.0)
+      hash-wasm:
+        specifier: ^4.12.0
+        version: 4.12.0
       hono:
         specifier: ^4.12.12
         version: 4.12.15
@@ -607,10 +607,6 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
-  '@phc/format@1.0.0':
-    resolution: {integrity: sha512-m7X9U6BG2+J+R1lSOdCiITLLrxm+cWlNI3HUFA92oLO77ObGNzaKdh8pMLqdZcshtkKuV84olNNXDfMc4FezBQ==}
-    engines: {node: '>=10'}
-
   '@pkgr/core@0.2.9':
     resolution: {integrity: sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
@@ -701,10 +697,6 @@ packages:
 
   ajv@6.15.0:
     resolution: {integrity: sha512-fgFx7Hfoq60ytK2c7DhnF8jIvzYgOMxfugjLOSMHjLIPgenqa7S7oaagATUq99mV6IYvN2tRmC0wnTYX6iPbMw==}
-
-  argon2@0.44.0:
-    resolution: {integrity: sha512-zHPGN3S55sihSQo0dBbK0A5qpi2R31z7HZDZnry3ifOyj8bZZnpZND2gpmhnRGO1V/d555RwBqIK5W4Mrmv3ig==}
-    engines: {node: '>=16.17.0'}
 
   balanced-match@4.0.4:
     resolution: {integrity: sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==}
@@ -970,6 +962,9 @@ packages:
     resolution: {integrity: sha512-XxwI8EOhVQgWp6iDL+3b0r86f4d6AX6zSU55HfB4ydCEuXLXc5FcYeOu+nnGftS4TEju/11rt4KJPTMgbfmv4A==}
     engines: {node: '>=10.13.0'}
 
+  hash-wasm@4.12.0:
+    resolution: {integrity: sha512-+/2B2rYLb48I/evdOIhP+K/DD2ca2fgBjp6O+GBEnCDk2e4rpeXIK8GvIyRPjTezgmWn9gmKwkQjjx6BtqDHVQ==}
+
   hono@4.12.15:
     resolution: {integrity: sha512-qM0jDhFEaCBb4TxoW7f53Qrpv9RBiayUHo0S52JudprkhvpjIrGoU1mnnr29Fvd1U335ZFPZQY1wlkqgfGXyLg==}
     engines: {node: '>=16.9.0'}
@@ -1033,14 +1028,6 @@ packages:
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
-
-  node-addon-api@8.7.0:
-    resolution: {integrity: sha512-9MdFxmkKaOYVTV+XVRG8ArDwwQ77XIgIPyKASB1k3JPq3M8fGQQQE3YpMOrKm6g//Ktx8ivZr8xo1Qmtqub+GA==}
-    engines: {node: ^18 || ^20 || >= 21}
-
-  node-gyp-build@4.8.4:
-    resolution: {integrity: sha512-LA4ZjwlnUblHVgq0oBF3Jl/6h/Nvs5fzBLwdEF4nuxnFdsfajde4WfxtJr3CaiH+F6ewcIB/q4jQ4UzPyid+CQ==}
-    hasBin: true
 
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
@@ -1518,8 +1505,6 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@phc/format@1.0.0': {}
-
   '@pkgr/core@0.2.9': {}
 
   '@types/esrecurse@4.3.1': {}
@@ -1641,13 +1626,6 @@ snapshots:
       fast-json-stable-stringify: 2.1.0
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
-
-  argon2@0.44.0:
-    dependencies:
-      '@phc/format': 1.0.0
-      cross-env: 10.1.0
-      node-addon-api: 8.7.0
-      node-gyp-build: 4.8.4
 
   balanced-match@4.0.4: {}
 
@@ -1893,6 +1871,8 @@ snapshots:
     dependencies:
       is-glob: 4.0.3
 
+  hash-wasm@4.12.0: {}
+
   hono@4.12.15: {}
 
   ignore@5.3.2: {}
@@ -1939,10 +1919,6 @@ snapshots:
   ms@2.1.3: {}
 
   natural-compare@1.4.0: {}
-
-  node-addon-api@8.7.0: {}
-
-  node-gyp-build@4.8.4: {}
 
   optionator@0.9.4:
     dependencies:

@@ -3,7 +3,7 @@ import { Transaction } from '@/db/_types'
 import { refreshTokens, users, Users } from '@/db/schema'
 import { AppError } from '@/errors/app.error'
 import { signAccessToken } from '@/lib/jwt'
-import { hash, argon2id, verify } from 'argon2'
+import { argon2id, argon2Verify } from 'hash-wasm'
 import { randomBytes, createHash } from 'crypto'
 import { eq } from 'drizzle-orm'
 
@@ -37,11 +37,14 @@ export async function registerNewUser(input: RegisterNewUserInput): Promise<Regi
   // If not continue
 
   // Create password hash using argon2
-  const passwordHash = await hash(input.password, {
-    type: argon2id,
-    memoryCost: 19456,
-    timeCost: 2,
+  const passwordHash = await argon2id({
+    password: 'myPassword',
+    salt: crypto.getRandomValues(new Uint8Array(16)),
     parallelism: 1,
+    iterations: 2,
+    memorySize: 19456,
+    hashLength: 32,
+    outputType: 'encoded',
   })
 
   // Insert user data to database and get returning data
@@ -101,7 +104,7 @@ export async function loginUser(email: Users['email'], password: string): Promis
   if (!user) throw new InvalidCredentialsError()
 
   // Verify password
-  const credentials_ok = await verify(user.passwordHash, password)
+  const credentials_ok = await argon2Verify({ password: password, hash: user.passwordHash })
   if (!credentials_ok) throw new InvalidCredentialsError()
 
   // Create access token
