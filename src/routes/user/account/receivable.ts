@@ -1,4 +1,4 @@
-import { AppVariables } from '@/routes/_app'
+import { UserVariables } from '@/routes/user/_index'
 import { Hono } from 'hono'
 
-export const receivableRoute = new Hono<{ Variables: AppVariables }>()
+export const receivableRoute = new Hono<{ Variables: UserVariables }>()
