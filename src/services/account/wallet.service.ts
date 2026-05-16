@@ -90,6 +90,35 @@ export async function getWallets(userId: Users['id']): Promise<WalletData[]> {
     .where(eq(accounts.userId, userId))
 }
 
+export async function getWallet({
+  userId,
+  accountId,
+}: {
+  userId: Users['id']
+  accountId: Accounts['id']
+}): Promise<WalletData> {
+  if (!(await isAccountBelongsToUser(accountId, userId))) throw new AccountNotFoundError()
+
+  const balances = accountBalanceSubquery()
+  const [wallet] = await db
+    .select({
+      accountId: accounts.id,
+      name: accounts.name,
+      description: accounts.description,
+      currency: accounts.currency,
+      bankName: wallets.bankName,
+      bankNumber: wallets.bankNumber,
+      balance: sql`COALESCE(${balances.balance}, '0')`.mapWith(String),
+      createdAt: accounts.createdAt,
+      updatedAt: accounts.updatedAt,
+    })
+    .from(accounts)
+    .innerJoin(wallets, eq(accounts.id, wallets.accountId))
+    .leftJoin(balances, eq(accounts.id, balances.accountId))
+    .where(and(eq(accounts.userId, userId), eq(accounts.id, accountId)))
+  return wallet
+}
+
 export async function updateWallet(
   input: UpdateWalletInput & { userId: Users['id'] }
 ): Promise<WalletData> {

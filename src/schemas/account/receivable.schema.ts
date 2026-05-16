@@ -1,11 +1,11 @@
-import { nullishDateStringInput, nullishStringInput } from '@/schemas/_helpers'
+import { currencyInput, nullishDateStringInput, nullishStringInput } from '@/schemas/_helpers'
 import z from 'zod'
 
 export type CreateReceivableInput = z.infer<typeof createReceivableSchema>
 export const createReceivableSchema = z.object({
   name: z.string().trim(),
   description: nullishStringInput,
-  currency: z.string().trim(),
+  currency: currencyInput,
   contactName: nullishStringInput,
   contactInfo: nullishStringInput,
   dueDate: nullishDateStringInput,

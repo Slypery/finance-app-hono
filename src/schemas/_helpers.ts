@@ -22,7 +22,8 @@ const validCurrencies = new Set(Intl.supportedValuesOf('currency'))
 
 export const currencyInput = z
   .string()
-  .refine((val) => validCurrencies.has(val.toUpperCase()), { message: 'Invalid currency code' })
+  .toUpperCase()
+  .refine((val) => validCurrencies.has(val), { message: 'Invalid currency code' })
 
 export const stringDecimalInput = ({ min, max }: { min?: string; max?: string } = {}) =>
   z
