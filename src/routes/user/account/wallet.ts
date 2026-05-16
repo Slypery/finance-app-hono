@@ -1,7 +1,7 @@
 import { jsonValidator } from '@/helpers/validator'
 import { UserVariables } from '@/routes/user/_index'
-import { deleteAccountInput } from '@/schemas/deleteAccount.schema'
-import { createWalletSchema, updateWalletSchema } from '@/schemas/wallet.schema'
+import { deleteAccountInput } from '@/schemas/account/deleteAccount.schema'
+import { createWalletSchema, updateWalletSchema } from '@/schemas/account/wallet.schema'
 import { deleteAccount } from '@/services/account/deleteAccount.service'
 import {
   createWallet,
@@ -10,7 +10,6 @@ import {
   updateWallet,
 } from '@/services/account/wallet.service'
 import { Hono } from 'hono'
-import { success } from 'zod'
 
 export const walletRoute = new Hono<{ Variables: UserVariables }>()
 
